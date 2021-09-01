@@ -24,3 +24,5 @@ yarn-error.log*
 
 .package-lock.json
 package-lock.json
+.secrets.js
+secrets.js

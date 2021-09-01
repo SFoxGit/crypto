@@ -7,7 +7,10 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';const useStyles = makeStyles((theme) => ({
+import MenuItem from '@material-ui/core/MenuItem';
+import { useHistory } from 'react-router';
+
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -19,6 +22,7 @@ import MenuItem from '@material-ui/core/MenuItem';const useStyles = makeStyles((
   },
 }));
 export default function Navbar() {
+  const history = useHistory()
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -27,7 +31,7 @@ export default function Navbar() {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (route) => {
     setAnchorEl(null);
   };
 
@@ -44,7 +48,7 @@ export default function Navbar() {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={() => {handleClose(); history.push("/crypto")}}>Crypto</MenuItem>
           <MenuItem onClick={handleClose}>My account</MenuItem>
           <MenuItem onClick={handleClose}>Logout</MenuItem>
         </Menu>
