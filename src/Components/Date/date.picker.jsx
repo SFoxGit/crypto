@@ -26,7 +26,7 @@ export default function DatePicker(props) {
         <KeyboardDatePicker
           disableToolbar
           variant="inline"
-          format="MM/dd/yyyy"
+          format="yyyy-MM-dd"
           margin="normal"
           id="date-picker-inline"
           label="Date picker inline"
@@ -43,7 +43,7 @@ export default function DatePicker(props) {
           margin="normal"
           id="date-picker-dialog"
           label="Date picker dialog"
-          format="MM/dd/yyyy"
+          format="yyyy-MM-dd"
           value={selectedEndDate}
           onChange={handleEndDateChange}
           KeyboardButtonProps={{
