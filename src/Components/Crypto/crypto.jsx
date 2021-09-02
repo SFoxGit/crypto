@@ -34,7 +34,7 @@ export default function Crypto() {
   const [selectedStartDate, setSelectedStartDate] = useState(new Date());
   const [selectedEndDate, setSelectedEndDate] = useState(new Date());
   const [search, setSearch] = useState('');
-  const [results, setResults] = useState([])
+  const [resultsToMap, setResultsToMap] = useState([])
 
   const searchForCrypto = (e) => {
     const formatDate = (inputDate) => {
@@ -50,7 +50,9 @@ export default function Crypto() {
       .then(res => {
         console.log(res.data)
         res.data.results.forEach(element => {
-          const newArr = results.push({
+          let newArr = resultsToMap
+          console.log('new arr: ' + newArr)
+          newArr.push({
             "close": element.c,
             "high": element.h,
             "low": element.l,
@@ -60,7 +62,8 @@ export default function Crypto() {
             "volume": element.v,
             "weighted": element.vw
           })
-          setResults(newArr)
+          console.log(newArr)
+          setResultsToMap([...newArr])
         })
       })
       .catch(err => console.log(err))
@@ -75,17 +78,15 @@ export default function Crypto() {
       <Box
         xs={10}
         boxShadow={14}
-        bgcolor="background.paper"
+
         m={1}
         p={1}
         width="100%"
         height="100%"
       // style={{ width: '50%', height: '50%' }}
       >
-        <Grid container spacing={3}>
-
-          <Grid item xs={3}>
-
+        <Grid container justifyContent={'center'} alignItems={'center'} spacing={3}>
+          <Grid item xs={3} align="center">
             <FormControl className={classes.formControl}>
               <InputLabel id="demo-simple-select-label">Crypto: </InputLabel>
               <Select
@@ -107,12 +108,30 @@ export default function Crypto() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={6} align="center">
             <DatePicker width="50%" selectedStartDate={selectedStartDate} setSelectedStartDate={setSelectedStartDate} selectedEndDate={selectedEndDate} setSelectedEndDate={setSelectedEndDate} />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={3} align="center">
             <Button variant="outlined" color="primary" onClick={searchForCrypto}>Search</Button>
           </Grid>
+          <Grid container key={"table"}>
+            {resultsToMap.length ? resultsToMap.map(entry => (
+              <Grid container key={entry.time}>
+                <Grid item xs={3} align="center">
+                  {entry.open}
+                </Grid>
+                <Grid item xs={3} align="center">
+                  {entry.close}
+                </Grid>
+                <Grid item xs={3} align="center">
+                  {entry.high}
+                </Grid>
+                <Grid item xs={3} align="center">
+                  {entry.low}
+                </Grid>
+              </Grid >
+            )):null}
+          </Grid >
         </Grid>
       </Box>
     </Grid>
