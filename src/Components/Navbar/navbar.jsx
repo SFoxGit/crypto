@@ -31,7 +31,7 @@ export default function Navbar() {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = (route) => {
+  const handleClose = () => {
     setAnchorEl(null);
   };
 
