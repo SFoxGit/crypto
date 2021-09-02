@@ -37,6 +37,9 @@ export default function DatePicker(props) {
           }}
         />
         <KeyboardDatePicker
+          disableToolbar
+          variant="inline"
+
           margin="normal"
           id="date-picker-dialog"
           label="Date picker dialog"
